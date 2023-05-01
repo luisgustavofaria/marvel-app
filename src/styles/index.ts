@@ -7,9 +7,13 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  body {
+    background: radial-gradient(circle, #ed1d24, #800000);
+  }
+
   body, input, textarea, button {
     font-family: 'Inter', sans-serif;
-    background-color: #F0F2F5;
+    font-family: 'Marvel', sans-serif;
   }
 
   p {
