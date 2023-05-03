@@ -6,7 +6,7 @@ import Logo from '../../../public/Logo.png';
 const StyledNavbar = styled.div`
   padding-left: 40px;
   width: 100%;
-  height: 120px;
+  height: 100px;
   display: flex;
   align-items: center;
 `;
