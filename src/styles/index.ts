@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background: radial-gradient(circle, #ed1d24, #800000);
+    padding: 10px;
   }
 
   body, input, textarea, button {

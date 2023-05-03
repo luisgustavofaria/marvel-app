@@ -4,12 +4,11 @@ import Image from 'next/image';
 import Logo from '../../../public/Logo.png';
 
 const StyledNavbar = styled.div`
-  padding-left: 50px;
+  padding-left: 40px;
   width: 100%;
-  height: 100px;
+  height: 120px;
   display: flex;
   align-items: center;
-  gap: 20px;
 `;
 
 const StyledLi = styled.div`
@@ -19,7 +18,12 @@ const StyledLi = styled.div`
 
   ul {
     display: flex;
-    gap: 10px;
+    width: 100%;
+    justify-content: space-around;
+
+    @media (max-width: 900px) {
+      justify-content: space-around;
+    }
   }
 
   li {
@@ -36,8 +40,13 @@ const StyledLi = styled.div`
       color: #ffffff;
       cursor: pointer;
       border: 1px solid #000000;
-      border-radius: 20px 0 20px 0;
+      border-radius: 0px 20px 0px 20px;
       background: radial-gradient(circle, #ed1d24, #800000);
+    }
+
+    @media (max-width: 900px) {
+      width: 100px;
+      font-size: 1rem;
     }
   }
 `;
@@ -45,14 +54,13 @@ const StyledLi = styled.div`
 export default function Navbar() {
   return (
     <StyledNavbar>
-      <Image src={Logo} alt="" width={200} />
+      <Image src={Logo} alt="" width={200} priority />
       <StyledLi>
         <ul>
           <li>CHARACTERS</li>
           <li>COMICS</li>
-          <li>EVENTS</li>
           <li>SERIES</li>
-          <li>STORIES</li>
+          <li>FAVORITES</li>
         </ul>
       </StyledLi>
     </StyledNavbar>
