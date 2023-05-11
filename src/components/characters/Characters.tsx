@@ -95,7 +95,7 @@ interface ICard {
   isFavorited: boolean;
 }
 
-export default function CardList() {
+export default function Characters() {
   const cards: ICard[] = [
     {
       id: 1,
@@ -132,7 +132,6 @@ export default function CardList() {
     setFavoriteCards(newFavoriteCards);
   };
 
-  console.log(favoriteCards);
   return (
     <ContainerDiv>
       <DivInput>
