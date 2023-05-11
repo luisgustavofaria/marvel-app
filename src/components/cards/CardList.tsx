@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { MagnifyingGlass, Star } from 'phosphor-react';
+import Image from 'next/image';
+import ironMan from '../../../public/iron-man.png';
 
 const ContainerDiv = styled.div`
   background-color: #dcdcff;
@@ -62,6 +65,11 @@ const Card = styled.div`
 
 const CardImage = styled.div`
   height: 80%;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 const CardFooter = styled.div`
   display: flex;
@@ -74,17 +82,57 @@ const CardFooter = styled.div`
   strong {
     font-size: 1.5rem;
   }
+
+  div {
+    height: 32px;
+  }
 `;
 
+interface ICard {
+  id: number;
+  nameCharacter: string;
+  imgCharacter: any;
+  isFavorited: boolean;
+}
+
 export default function CardList() {
-  const Cards = [
+  const cards: ICard[] = [
     {
       id: 1,
-      character: 'Hulk',
-      img: 'Hulk',
+      nameCharacter: 'Iron Man',
+      imgCharacter: ironMan,
+      isFavorited: true,
+    },
+    {
+      id: 2,
+      nameCharacter: 'Hulk',
+      imgCharacter: ironMan,
+      isFavorited: true,
+    },
+    {
+      id: 3,
+      nameCharacter: 'Spider Man',
+      imgCharacter: ironMan,
+      isFavorited: false,
     },
   ];
 
+  const [favoriteCards, setFavoriteCards] = useState<ICard[]>(cards);
+
+  const handleFavoriteToggle = (id: Number) => {
+    const newFavoriteCards: ICard[] = favoriteCards.map((card) => {
+      if (card.id === id) {
+        return {
+          ...card,
+          isFavorited: !card.isFavorited,
+        };
+      }
+      return card;
+    });
+    setFavoriteCards(newFavoriteCards);
+  };
+
+  console.log(favoriteCards);
   return (
     <ContainerDiv>
       <DivInput>
@@ -95,15 +143,23 @@ export default function CardList() {
       </DivInput>
 
       <ContainerCards>
-        <Card>
-          <CardImage></CardImage>
-          <CardFooter>
-            <strong>Iron Man</strong>
-            {<Star size={32} /> || (
-              <Star size={32} color="#ffe357" weight="fill" />
-            )}
-          </CardFooter>
-        </Card>
+        {favoriteCards.map((card) => (
+          <Card key={card.id}>
+            <CardImage>
+              <Image src={card.imgCharacter} alt="" priority />
+            </CardImage>
+            <CardFooter>
+              <strong>{card.nameCharacter}</strong>
+              <div onClick={() => handleFavoriteToggle(card.id)}>
+                {card.isFavorited ? (
+                  <Star size={32} color="#ffe357" weight="fill" />
+                ) : (
+                  <Star size={32} />
+                )}
+              </div>
+            </CardFooter>
+          </Card>
+        ))}
       </ContainerCards>
     </ContainerDiv>
   );
