@@ -1,7 +1,8 @@
-import styled from 'styled-components';
-import Image from 'next/image';
+import styled from "styled-components";
+import Image from "next/image";
 
-import Logo from '../../../public/Logo.png';
+import Logo from "../../../public/Logo.png";
+import Link from "next/link";
 
 const StyledNavbar = styled.div`
   padding-left: 40px;
@@ -23,6 +24,10 @@ const StyledLi = styled.div`
 
     @media (max-width: 900px) {
       justify-content: space-around;
+    }
+    a {
+      color: black;
+      text-decoration: none;
     }
   }
 
@@ -54,10 +59,14 @@ const StyledLi = styled.div`
 export default function Navbar() {
   return (
     <StyledNavbar>
-      <Image src={Logo} alt="" width={200} priority />
+      <Link href="/">
+        <Image src={Logo} alt="" width={200} priority />
+      </Link>
       <StyledLi>
         <ul>
-          <li>CHARACTERS</li>
+          <Link href="/characters">
+            <li>CHARACTERS</li>
+          </Link>
           <li>COMICS</li>
           <li>SERIES</li>
           <li>FAVORITES</li>
