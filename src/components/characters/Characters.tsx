@@ -23,6 +23,7 @@ export interface ICard {
 
 export default function Characters() {
   const [characters, setCharacters] = useState<ICard[]>([]);
+  const [searchCharacters, setSearchCharacters] = useState<string>("");
 
   useEffect(() => {
     fetchCharacters();
@@ -52,12 +53,30 @@ export default function Characters() {
     setCharacters(newFavoriteCards);
   };
 
+  const handleSearchCharacters = () => {
+    if (!searchCharacters) {
+      // Se a pesquisa estiver vazia, restaura os personagens originais
+      fetchCharacters();
+    } else {
+      // Filtra os personagens com base no nome pesquisado
+      const filteredCharacters = characters.filter((character) =>
+        character.name.toLowerCase().includes(searchCharacters.toLowerCase())
+      );
+      setCharacters(filteredCharacters);
+    }
+  };
+
   return (
     <ContainerDiv>
       <DivInput>
-        <Input type="text" placeholder="Characters Search" />
+        <Input
+          type="text"
+          placeholder="Characters Search"
+          value={searchCharacters}
+          onChange={(e) => setSearchCharacters(e.target.value)}
+        />
         <Button>
-          <MagnifyingGlass size={32} />
+          <MagnifyingGlass size={32} onClick={handleSearchCharacters} />
         </Button>
       </DivInput>
 
