@@ -25,15 +25,19 @@ export default function Characters() {
   const [characters, setCharacters] = useState<ICard[]>([]);
 
   useEffect(() => {
-    const fetchCharacters = async () => {
+    fetchCharacters();
+  }, []);
+
+  const fetchCharacters = async () => {
+    try {
       const data = await getCharacters();
       if (data) {
         setCharacters(data);
       }
-    };
-
-    fetchCharacters();
-  }, []);
+    } catch (error) {
+      console.error("Error fetching characters:", error);
+    }
+  };
 
   const handleFavoriteToggle = (id: number) => {
     const newFavoriteCards = characters.map((card) => {
