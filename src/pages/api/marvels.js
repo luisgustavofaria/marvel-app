@@ -1,7 +1,9 @@
 import md5 from "md5";
 
-const publicKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY;
-const privateKey = process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY;
+// const publicKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY;
+// const privateKey = process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY;
+
+
 
 const ts = Date.now().toString();
 const hash = md5(`${ts}${privateKey}${publicKey}`);
