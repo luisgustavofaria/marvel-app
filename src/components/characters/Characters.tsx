@@ -11,7 +11,7 @@ import {
   CardFooter,
   CardImage,
 } from "../characters/styles";
-import { getCharacters } from "../../pages/api/marvels";
+import { getCharacters, getCharacterById } from "../../pages/api/marvels";
 
 export interface ICard {
   id: number;
@@ -39,6 +39,16 @@ export default function Characters() {
       console.error("Error fetching characters:", error);
     }
   };
+  const fetchCharacterById = async (name: string) => {
+    try {
+      const data = await getCharacterById(name);
+      if (data) {
+        setCharacters([data]);
+      }
+    } catch (error) {
+      console.error("Error fetching characters:", error);
+    }
+  };
 
   const handleFavoriteToggle = (id: number) => {
     const newFavoriteCards = characters.map((card) => {
@@ -54,15 +64,10 @@ export default function Characters() {
   };
 
   const handleSearchCharacters = () => {
-    if (!searchCharacters) {
-      // Se a pesquisa estiver vazia, restaura os personagens originais
-      fetchCharacters();
+    if (searchCharacters) {
+      fetchCharacterById(searchCharacters);
     } else {
-      // Filtra os personagens com base no nome pesquisado
-      const filteredCharacters = characters.filter((character) =>
-        character.name.toLowerCase().includes(searchCharacters.toLowerCase())
-      );
-      setCharacters(filteredCharacters);
+      fetchCharacters();
     }
   };
 
