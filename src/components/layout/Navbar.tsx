@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import Image from "next/image";
+import styled from 'styled-components';
+import Image from 'next/image';
 
-import Logo from "../../../public/Logo.png";
-import Link from "next/link";
+import Logo from '../../../public/Logo.png';
+import Link from 'next/link';
 
 const StyledNavbar = styled.div`
   padding-left: 40px;
@@ -59,15 +59,15 @@ const StyledLi = styled.div`
 export default function Navbar() {
   return (
     <StyledNavbar>
-      <Link href="/">
-        <Image src={Logo} alt="" width={200} priority />
-      </Link>
+      <Image src={Logo} alt="" width={200} priority />
       <StyledLi>
         <ul>
-          <Link href="/characters">
+          <Link href="/">
             <li>CHARACTERS</li>
           </Link>
-          <li>COMICS</li>
+          <Link href="/comics">
+            <li>COMICS</li>
+          </Link>
           <li>SERIES</li>
           <li>FAVORITES</li>
         </ul>

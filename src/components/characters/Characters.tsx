@@ -26,20 +26,20 @@ export default function Characters() {
   const [searchCharacters, setSearchCharacters] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false); //trocar MagnifyingGlass por X
 
-  useEffect(() => {
-    fetchCharacters();
-  }, []);
+  // useEffect(() => {
+  //   fetchCharacters();
+  // }, []);
 
-  const fetchCharacters = async () => {
-    try {
-      const data = await getCharacters();
-      if (data) {
-        setCharacters(data);
-      }
-    } catch (error) {
-      console.error('Error fetching characters:', error);
-    }
-  };
+  // const fetchCharacters = async () => {
+  //   try {
+  //     const data = await getCharacters();
+  //     if (data) {
+  //       setCharacters(data);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching characters:', error);
+  //   }
+  // };
   const fetchCharacterById = async (name: string) => {
     try {
       const data = await getCharacterById(name);
@@ -72,7 +72,7 @@ export default function Characters() {
   };
 
   const handleX = () => {
-    fetchCharacters();
+    //fetchCharacters();
     setIsSearching(!isSearching);
   };
 
@@ -84,7 +84,7 @@ export default function Characters() {
       e.target.value.length < 1
     ) {
       setIsSearching(false);
-      fetchCharacters();
+      //fetchCharacters();
     }
   };
 

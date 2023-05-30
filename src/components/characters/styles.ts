@@ -7,6 +7,8 @@ export const ContainerDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  min-height: 1300px;
+  margin-bottom: 100px;
 `;
 
 export const DivInput = styled.div`
