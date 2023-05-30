@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { MagnifyingGlass, Star } from "phosphor-react";
-import Image from "next/image";
+import { useEffect, useState } from 'react';
+import { MagnifyingGlass, Star, X } from 'phosphor-react';
+import Image from 'next/image';
 import {
   ContainerDiv,
   DivInput,
@@ -10,8 +10,8 @@ import {
   Card,
   CardFooter,
   CardImage,
-} from "../characters/styles";
-import { getCharacters, getCharacterById } from "../../pages/api/marvels";
+} from '../characters/styles';
+import { getCharacters, getCharacterById } from '../../pages/api/marvels';
 
 export interface ICard {
   id: number;
@@ -23,7 +23,8 @@ export interface ICard {
 
 export default function Characters() {
   const [characters, setCharacters] = useState<ICard[]>([]);
-  const [searchCharacters, setSearchCharacters] = useState<string>("");
+  const [searchCharacters, setSearchCharacters] = useState<string>('');
+  const [isSearching, setIsSearching] = useState<boolean>(false); //trocar MagnifyingGlass por X
 
   useEffect(() => {
     fetchCharacters();
@@ -36,17 +37,17 @@ export default function Characters() {
         setCharacters(data);
       }
     } catch (error) {
-      console.error("Error fetching characters:", error);
+      console.error('Error fetching characters:', error);
     }
   };
   const fetchCharacterById = async (name: string) => {
     try {
       const data = await getCharacterById(name);
       if (data) {
-        setCharacters([data]);
+        setCharacters(data);
       }
     } catch (error) {
-      console.error("Error fetching characters:", error);
+      console.error('Error fetching characters:', error);
     }
   };
 
@@ -64,11 +65,15 @@ export default function Characters() {
   };
 
   const handleSearchCharacters = () => {
-    if (searchCharacters) {
+    if (searchCharacters.length >= 4) {
       fetchCharacterById(searchCharacters);
-    } else {
-      fetchCharacters();
+      setIsSearching(!isSearching);
     }
+  };
+
+  const handleX = () => {
+    fetchCharacters();
+    setIsSearching(!isSearching);
   };
 
   return (
@@ -81,7 +86,15 @@ export default function Characters() {
           onChange={(e) => setSearchCharacters(e.target.value)}
         />
         <Button>
-          <MagnifyingGlass size={32} onClick={handleSearchCharacters} />
+          {isSearching ? (
+            <X size={32} color="#6c757d" onClick={handleX} />
+          ) : (
+            <MagnifyingGlass
+              size={32}
+              color="#6c757d"
+              onClick={handleSearchCharacters}
+            />
+          )}
         </Button>
       </DivInput>
 
