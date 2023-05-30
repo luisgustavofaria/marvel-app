@@ -65,7 +65,7 @@ export default function Characters() {
   };
 
   const handleSearchCharacters = () => {
-    if (searchCharacters.length >= 4) {
+    if (searchCharacters.length >= 3) {
       fetchCharacterById(searchCharacters);
       setIsSearching(!isSearching);
     }
@@ -76,6 +76,18 @@ export default function Characters() {
     setIsSearching(!isSearching);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchCharacters(e.target.value);
+    if (
+      e.target.value === '' ||
+      e.target.value.length > 1 ||
+      e.target.value.length < 1
+    ) {
+      setIsSearching(false);
+      fetchCharacters();
+    }
+  };
+
   return (
     <ContainerDiv>
       <DivInput>
@@ -83,7 +95,7 @@ export default function Characters() {
           type="text"
           placeholder="Characters Search"
           value={searchCharacters}
-          onChange={(e) => setSearchCharacters(e.target.value)}
+          onChange={handleInputChange}
         />
         <Button>
           {isSearching ? (
