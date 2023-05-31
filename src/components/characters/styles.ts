@@ -59,6 +59,9 @@ export const Card = styled.div`
   width: 300px;
   height: 400px;
   border-radius: 10px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const CardImage = styled.div`

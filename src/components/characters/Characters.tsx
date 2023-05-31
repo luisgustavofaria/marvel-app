@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { MagnifyingGlass, Star, X } from 'phosphor-react';
 import Image from 'next/image';
 import {
@@ -25,6 +26,7 @@ export default function Characters() {
   const [characters, setCharacters] = useState<ICard[]>([]);
   const [searchCharacters, setSearchCharacters] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false); //trocar MagnifyingGlass por X
+  const router = useRouter();
 
   // useEffect(() => {
   //   fetchCharacters();
@@ -113,7 +115,9 @@ export default function Characters() {
       <ContainerCards>
         {characters.map((character) => (
           <Card key={character.id}>
-            <CardImage>
+            <CardImage
+              onClick={() => router.push(`/characterId/${character.id}`)}
+            >
               <Image
                 src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
                 alt={character.name}
